@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transfer Ownership</title>
+</head>
+<body>
+    <h1>Transfer Ownership</h1>
+    <form action="/transfer_ownership" method="post">
+        <label for="product_id">Product ID:</label><br>
+        <input type="number" id="product_id" name="product_id" required><br><br>
+        <label for="new_owner">New Owner Address:</label><br>
+        <!-- owners select field -->
+        <select id="new_owner" name="new_owner" required>
+            {% for owner in owners %}
+                <option value="{{ owner }}">{{ owner }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="location">New Location:</label><br>
+        <input type="text" id="location" name="location" required><br><br>
+        <input type="submit" value="Transfer Ownership">
+    </form>
+    <br>
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>

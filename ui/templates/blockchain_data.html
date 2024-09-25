@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blockchain Data</title>
+</head>
+<body>
+    <h1>Blockchain Events</h1>
+    {% for event in events %}
+        <h3>{{ event['event'] }}</h3>
+        <p><strong>Block Number:</strong> {{ event['blockNumber'] }}</p>
+        <p><strong>Transaction Hash:</strong> {{ event['transactionHash'] }}</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            {% for key, value in event['data'].items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+    {% endfor %}
+    <br>
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>

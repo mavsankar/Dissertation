@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Product</title>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    <form action="/add_product" method="post">
+        <label for="product_name">Product Name:</label><br>
+        <input type="text" id="product_name" name="product_name" required><br><br>
+        <label for="location">Initial Location:</label><br>
+        <input type="text" id="location" name="location" required><br><br>
+        <input type="submit" value="Add Product">
+    </form>
+    <br>
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>

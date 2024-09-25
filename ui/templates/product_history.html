@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product History</title>
+</head>
+<body>
+    <h1>Product History for ID {{ product_id }}</h1>
+    {% for event in history %}
+        <p><strong>Event:</strong> {{ event['event'] }}</p>
+        <p><strong>Block Number:</strong> {{ event['blockNumber'] }}</p>
+        <p><strong>Data:</strong></p>
+        <ul>
+            {% for key, value in event['data'].items() %}
+                <li>{{ key }}: {{ value }}</li>
+            {% endfor %}
+        </ul>
+        <hr>
+    {% endfor %}
+    <br>
+    <a href="/product_history">View Another Product History</a><br>
+    <a href="/">Back to Dashboard</a>
+</body>
+</html>
