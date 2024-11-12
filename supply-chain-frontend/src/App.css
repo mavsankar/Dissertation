@@ -1,0 +1,103 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  background-color: #2c3e50;
+  color: white;
+  padding: 15px;
+}
+
+nav h2 {
+  display: inline;
+  margin-right: 50px;
+}
+
+nav ul {
+  display: inline;
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a, nav ul li button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+nav ul li button:hover {
+  text-decoration: underline;
+}
+
+.container {
+  padding: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  font-weight: bold;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+}
+
+form button {
+  padding: 10px 15px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #3498db;
+}
+
+h2, h3 {
+  color: #2c3e50;
+}
+
+p {
+  font-size: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+ul li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.persona-selection {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.persona-selection button {
+  margin: 10px;
+  padding: 15px 25px;
+  font-size: 18px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.persona-selection button:hover {
+  background-color: #3498db;
+}

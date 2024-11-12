@@ -1,0 +1,49 @@
+/* src/components/SupplyChainMap.css */
+.supply-chain-map {
+    padding: 20px;
+  }
+  
+  .timeline {
+    position: relative;
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .timeline-event {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 40px;
+  }
+  
+  .timeline-event::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #2980b9;
+    border-radius: 50%;
+  }
+  
+  .timeline-event::after {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 10px;
+    width: 2px;
+    height: 100%;
+    background-color: #2980b9;
+  }
+  
+  .timeline-event:last-child::after {
+    display: none;
+  }
+  
+  .event-content {
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
