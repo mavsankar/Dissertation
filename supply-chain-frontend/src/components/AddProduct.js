@@ -1,5 +1,7 @@
+// AddProduct.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { TextField, Button, Typography, Box, Paper } from '@mui/material';
 
 function AddProduct() {
   const [productName, setProductName] = useState('');
@@ -45,37 +47,44 @@ function AddProduct() {
   };
 
   return (
-    <div>
-      <h3>Add Product</h3>
+    <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
+      <Typography variant="h5" gutterBottom>
+        Add Product
+      </Typography>
       <form onSubmit={handleAddProduct}>
-        <div>
-          <label>Product Name:</label><br/>
-          <input
-            type="text"
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Product Name"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
             required
+            fullWidth
           />
-        </div>
-        <div>
-          <label>Location:</label><br/>
-          <input
-            type="text"
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             required
+            fullWidth
           />
-        </div>
-        {/* Optional: Display the supplier's address */}
+        </Box>
         {supplierAccount && (
-          <div>
-            <p><strong>Supplier Address:</strong> {supplierAccount}</p>
-          </div>
+          <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+            <strong>Supplier Address:</strong> {supplierAccount}
+          </Typography>
         )}
-        <button type="submit">Add Product</button>
+        <Button variant="contained" color="primary" type="submit">
+          Add Product
+        </Button>
       </form>
-      <p>{message}</p>
-    </div>
+      {message && (
+        <Typography variant="body1" color="success.main" sx={{ mt: 2 }}>
+          {message}
+        </Typography>
+      )}
+    </Paper>
   );
 }
 

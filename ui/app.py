@@ -28,7 +28,7 @@ with open(r'C:\Users\mavsa\Desktop\repos\supply_chain_project\blockchain\build\c
     contract_json = json.load(f)
     contract_abi = contract_json['abi']
 
-contract_address = '0xE24Dbf5C6BCD25080164E60e732Cc3c5E2AcF9fa'  # Replace with actual contract address from migration
+contract_address = '0xCcb1e318D033B106eD64dB34F965A72430Ae2f6a'   # Replace with actual contract address from migration
 contract = web3.eth.contract(address=contract_address, abi=contract_abi)
 
 # Database connection

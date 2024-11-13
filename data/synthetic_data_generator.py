@@ -15,7 +15,7 @@ def add_product(product_name, location, selected_owner):
     payload = {
         'product_name': product_name,
         'location': location,
-        'selected_owner': selected_owner
+        'owner': selected_owner
     }
     response = requests.post(f'{API_BASE_URL}/add_product', json=payload)
     print(f'Add Product Response: {response.json()}')
@@ -40,33 +40,33 @@ def main():
     if not suppliers or not freight_providers or not companies:
         print('Error: Not all roles are available in the accounts.')
         return
-
+    print(suppliers, freight_providers, companies)
+    total_products = 20
     # Add multiple products
     print('\nAdding Products...')
-    for i in range(1, 25):
+    for i in range(1, total_products):
         product_name = f'Product_{i}'
         location = 'Factory A'
-        selected_owner = suppliers[0]['address']
+        selected_owner = suppliers[0]
         print(f'Adding {product_name} by Supplier {selected_owner}')
         add_product(product_name, location, selected_owner)
         # time.sleep(1)  # Pause to simulate time between actions
-    return
     # Perform ownership transfers
     print('\nTransferring Ownerships...')
     # Assuming product IDs start from 1
-    product_ids = list(range(1, 6))
+    product_ids = list(range(1, total_products))
     for pid in product_ids:
         # Transfer from Supplier to Freight Provider
         print(f'\nTransferring ownership of product {pid} to Freight Provider')
-        selected_owner = suppliers[0]['address']
-        new_owner = freight_providers[0]['address']
+        selected_owner = suppliers[0]
+        new_owner = freight_providers[0]
         transfer_ownership(pid, new_owner, 'Warehouse B', selected_owner)
         time.sleep(1)
         
         # Transfer from Freight Provider to Company
         print(f'Transferring ownership of product {pid} to Company')
         selected_owner = new_owner
-        new_owner = companies[0]['address']
+        new_owner = companies[0]
         transfer_ownership(pid, new_owner, 'Store C', selected_owner)
         time.sleep(1)
 
@@ -76,7 +76,7 @@ def main():
     # Anomaly 1: Company transfers product back to Supplier
     print('\nAnomaly 1: Company transfers product back to Supplier')
     pid = product_ids[0]  # Use the first product
-    selected_owner = companies[0]['address']  # Current owner is company
+    selected_owner = companies[0]  # Current owner is company
     new_owner = suppliers[0]['address']
     transfer_ownership(pid, new_owner, 'Returned Goods Warehouse', selected_owner)
     time.sleep(1)

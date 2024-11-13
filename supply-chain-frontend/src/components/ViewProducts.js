@@ -1,6 +1,16 @@
+// ViewProducts.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  Paper,
+  Box,
+} from '@mui/material';
 
 function ViewProducts() {
   const [products, setProducts] = useState([]);
@@ -9,7 +19,9 @@ function ViewProducts() {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/blockchain_data');
-        const productEvents = response.data.events.filter(event => event.event === 'ProductAdded');
+        const productEvents = response.data.events.filter(
+          (event) => event.event === 'ProductAdded'
+        );
         setProducts(productEvents);
       } catch (error) {
         console.error(error);
@@ -19,22 +31,33 @@ function ViewProducts() {
   }, []);
 
   return (
-    <div>
-      <h3>Available Products</h3>
+    <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
+      <Typography variant="h5" gutterBottom>
+        Available Products
+      </Typography>
       {products.length > 0 ? (
-        <ul>
+        <List>
           {products.map((event, index) => (
-            <li key={index}>
-              <p><strong>ID:</strong> {event.data.id}</p>
-              <p><strong>Name:</strong> {event.data.name}</p>
-              <Link to="/company/product-details" state={{ productId: event.data.id }}>View Details</Link>
-            </li>
+            <ListItem key={index} divider>
+              <ListItemText
+                primary={`ID: ${event.data.id}`}
+                secondary={`Name: ${event.data.name}`}
+              />
+              <Button
+                variant="outlined"
+                component={RouterLink}
+                to="/company/product-details"
+                state={{ productId: event.data.id }}
+              >
+                View Details
+              </Button>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       ) : (
-        <p>No products available.</p>
+        <Typography variant="body1">No products available.</Typography>
       )}
-    </div>
+    </Paper>
   );
 }
 

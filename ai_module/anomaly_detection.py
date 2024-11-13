@@ -6,8 +6,10 @@ from sklearn.cluster import DBSCAN
 def detect_anomalies(data):
     # Copy data to avoid modifying the original dataset
     data = data.copy()
+    # Print data where event is OwnershipTransferred
+    print(data[data['event'] == 'OwnershipTransferred'].head())
     # Ensure necessary columns are present
-    required_columns = ['event', 'from', 'to','product_id', 'location', 'timestamp']
+    required_columns = ['event', 'from', 'to','product_id', 'location', 'timestamp', 'name', 'owner']
     for col in required_columns:
         if col not in data.columns:
             raise ValueError(f'Missing required column: {col}')
@@ -35,14 +37,14 @@ def detect_anomalies(data):
     
     # Encode categorical variables
     label_encoders = {}
-    categorical_columns = ['event', 'from_role', 'to_role', 'location']
+    categorical_columns = ['event', 'from_role', 'to_role', 'location', 'name', 'owner']
     for col in categorical_columns:
         le = LabelEncoder()
         data[col + '_encoded'] = le.fit_transform(data[col])
         label_encoders[col] = le  # Save encoders if needed later
     
     # Select features
-    feature_columns = ['event_encoded', 'from_role_encoded', 'to_role_encoded', 'location_encoded', 'time_diff']
+    feature_columns = ['event_encoded', 'from_role_encoded', 'to_role_encoded', 'location_encoded', 'time_diff', 'product_id', 'name_encoded', 'owner_encoded']
     X = data[feature_columns]
     
     # Scale features

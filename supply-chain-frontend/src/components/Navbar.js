@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 
 function Navbar({ persona, setPersona }) {
   const navigate = useNavigate();
@@ -10,67 +11,74 @@ function Navbar({ persona, setPersona }) {
   };
 
   return (
-    <nav>
-      <h2>Supply Chain Blockchain Demo</h2>
-      {persona && (
-        <ul>
-          {persona === "supplier" && (
-            <>
-              <li>
-                <Link to="/supplier">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/supplier/add-product">Add Product</Link>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            </>
-          )}
-          {persona === "FreightManagement" && (
-            <>
-              <li>
-                <Link to="/FreightManagement">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/FreightManagement/transfer-ownership">
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          Supply Chain Blockchain Demo
+        </Typography>
+        {persona && (
+          <>
+            {persona === "supplier" && (
+              <>
+                <Button color="inherit" component={RouterLink} to="/supplier">
+                  Dashboard
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/supplier/add-product">
+                  Add Product
+                </Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            )}
+            {persona === "FreightManagement" && (
+              <>
+                <Button color="inherit" component={RouterLink} to="/FreightManagement">
+                  Dashboard
+                </Button>
+                <Button
+                  color="inherit"
+                  component={RouterLink}
+                  to="/FreightManagement/transfer-ownership"
+                >
                   Transfer Ownership
-                </Link>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            </>
-          )}
-          {persona === "company" && (
-            <>
-              <li>
-                <Link to="/company">Dashboard</Link>
-              </li>
-              <li>
-                <Link to="/company/view-products">View Products</Link>
-              </li>
-              <li>
-                <Link to="/company/product-details">Product Details</Link>
-              </li>
-              <li>
-                <Link to="/company/product-history">Product History</Link>
-              </li>
-              <li>
-                <Link to="/predictive-analysis">Predictive Analysis</Link>
-              </li>
-              <li>
-                <Link to="/anomaly-detection">Anomaly Detection</Link>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
-            </>
-          )}
-        </ul>
-      )}
-    </nav>
+                </Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            )}
+            {persona === "company" && (
+              <>
+                <Button color="inherit" component={RouterLink} to="/company">
+                  Dashboard
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/company/view-products">
+                  View Products
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/company/product-details">
+                  Product Details
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/company/product-history">
+                  Product History
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/company/predictive-analysis">
+                  Predictive Analysis
+                </Button>
+                <Button color="inherit" component={RouterLink} to="/company/anomaly-detection">
+                  Anomaly Detection
+                </Button>
+                <Button color="inherit" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </>
+            )}
+          </>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
 
 export default Navbar;
+  

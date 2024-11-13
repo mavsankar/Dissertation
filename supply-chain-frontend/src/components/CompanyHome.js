@@ -1,12 +1,24 @@
+// CompanyHome.js
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { Typography, Button, Box } from '@mui/material';
 
 function CompanyHome() {
   return (
-    <div>
-      <p>Welcome, Company!</p>
-      <Link to="view-products">View Products</Link>
-    </div>
+    <Box sx={{ mt: 4 }}>
+      <Typography variant="h5" gutterBottom>
+        Welcome, Company!
+      </Typography>
+      <Button
+        variant="contained"
+        color="primary"
+        component={RouterLink}
+        to="view-products"
+        sx={{ mt: 2 }}
+      >
+        View Products
+      </Button>
+    </Box>
   );
 }
 

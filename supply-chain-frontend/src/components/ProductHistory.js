@@ -1,15 +1,24 @@
-import React, { useState } from "react";
-import axios from "axios";
+// ProductHistory.js
+import React, { useState } from 'react';
+import axios from 'axios';
+import {
+  TextField,
+  Button,
+  Typography,
+  Paper,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+} from '@mui/material';
 
 function ProductHistory() {
-  const [productId, setProductId] = useState("");
+  const [productId, setProductId] = useState('');
   const [history, setHistory] = useState([]);
 
   const handleGetHistory = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:5000/product_history/${productId}`
-      );
+      const response = await axios.get(`http://localhost:5000/product_history/${productId}`);
       setHistory(response.data.history);
     } catch (error) {
       console.error(error);
@@ -18,39 +27,47 @@ function ProductHistory() {
   };
 
   return (
-    <div>
-      <h3>Product History</h3>
-      <div>
-        <label>Product ID:</label>
-        <br />
-        <input
+    <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
+      <Typography variant="h5" gutterBottom>
+        Product History
+      </Typography>
+      <Box sx={{ mb: 2 }}>
+        <TextField
+          label="Product ID"
           type="number"
           value={productId}
           onChange={(e) => setProductId(e.target.value)}
+          fullWidth
         />
-        <button onClick={handleGetHistory}>Get History</button>
-      </div>
+      </Box>
+      <Button variant="contained" color="primary" onClick={handleGetHistory}>
+        Get History
+      </Button>
       {history.length > 0 && (
-        <ul>
+        <List sx={{ mt: 4 }}>
           {history.map((event, index) => (
-            <li key={index}>
-              <p>
-                <strong>Event:</strong> {event.event}
-              </p>
-              <p>
-                <strong>Block Number:</strong> {event.blockNumber}
-              </p>
-              <p>
-                <strong>Transaction Hash:</strong> {event.transactionHash}
-              </p>
-              <p>
-                <strong>Data:</strong> {JSON.stringify(event.data)}
-              </p>
-            </li>
+            <ListItem key={index} divider>
+              <ListItemText
+                primary={`Event: ${event.event}`}
+                secondary={
+                  <>
+                    <Typography variant="body2">
+                      <strong>Block Number:</strong> {event.blockNumber}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Transaction Hash:</strong> {event.transactionHash}
+                    </Typography>
+                    <Typography variant="body2">
+                      <strong>Data:</strong> {JSON.stringify(event.data)}
+                    </Typography>
+                  </>
+                }
+              />
+            </ListItem>
           ))}
-        </ul>
+        </List>
       )}
-    </div>
+    </Paper>
   );
 }
 

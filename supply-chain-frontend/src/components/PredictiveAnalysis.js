@@ -1,6 +1,14 @@
-// src/components/PredictiveAnalysis.js
+// PredictiveAnalysis.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Box,
+} from '@mui/material';
 
 function PredictiveAnalysis() {
   const [predictions, setPredictions] = useState([]);
@@ -17,21 +25,29 @@ function PredictiveAnalysis() {
     fetchPredictions();
   }, []);
 
-return (
-    <div>
-        <h3>Predictive Analysis</h3>
-        {Array.isArray(predictions) && predictions.length > 0 ? (
-            <ul>
-            Based on historic data, this product is likely to get the following products added in the next time period:
-                {predictions.map((prediction, index) => (
-                    <li key={index}>{prediction}</li>
-                ))}
-            </ul>
-        ) : (
-            <p>No predictions available.</p>
-        )}
-    </div>
-);
+  return (
+    <Paper elevation={3} sx={{ p: 3, mt: 2 }}>
+      <Typography variant="h5" gutterBottom>
+        Predictive Analysis
+      </Typography>
+      {Array.isArray(predictions) && predictions.length > 0 ? (
+        <Box sx={{ mt: 2 }}>
+          <Typography variant="body1" sx={{ mb: 2 }}>
+            Based on historical data, the following products are likely to be added in the next time period:
+          </Typography>
+          <List>
+            {predictions.map((prediction, index) => (
+              <ListItem key={index}>
+                <ListItemText primary={prediction} />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      ) : (
+        <Typography variant="body1">No predictions available.</Typography>
+      )}
+    </Paper>
+  );
 }
 
 export default PredictiveAnalysis;
